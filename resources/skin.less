@@ -14,12 +14,17 @@ article {
   max-width: 960px;
   width: 100%;
   margin: 20px auto 0;
-  padding: 0 20px 20px;
+  padding: 20px;
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #babbae;
   z-index: 1;
   position: relative;
+}
+
+.article__tagline {
+  font-style: oblique;
+  color: #666;
 }
 
 h1 {
@@ -32,4 +37,18 @@ h1 {
 .printfooter {
   display: none;
 }
-@import 'Header.less';
+
+header {
+  height: 61px;
+  max-width: 960px;
+  min-width: 300px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  z-index: 2;
+  position: relative;
+  margin: 20px auto;
+  flex-direction: row;
+}
+
+@import 'BodyContent.less';

@@ -62,8 +62,12 @@
       ]
     },
     "skins.openlibrary": {
+      "dependencies": [ "vue", "wvui" ],
       "packageFiles": [
-        "resources/skin.js"
+        "resources/skin.js",
+        "resources/Header.vue",
+        "resources/Footer.vue",
+        "resources/DropdownMenu.vue"
       ]
     }
   }

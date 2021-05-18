@@ -1,7 +1,20 @@
 {{{html-site-notice}}}
-{{>Header}}
+<header id="header-bar" class="header-bar"
+	{{#data-logos.wordmark}}
+	data-logo-width="{{width}}"
+	data-logo-height="{{height}}"
+	data-logo-src="{{src}}"
+	{{/data-logos.wordmark}}
+	data-title="{{msg-sitetitle}}"
+	data-tagline="{{msg-tagline}}"
+>
+	<!-- Vue.js -->
+</header>
 <article>
+	<div class="article__tagline">{{msg-tagline}}</div>
 	<h1>{{{html-title}}}</h1>
-	<a href="https://phabricator.wikimedia.org/T272878">TODO: T272878</a>
+	<div class="article__subtitle">{{{html-subtitle}}}</div>
 	{{{html-body-content}}}
 </article>
+<footer>
+</footer>

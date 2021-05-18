@@ -1,25 +1,44 @@
 /* scripts can go here */
-var Vue = mw.loader.require( 'vue' );
+var Vue = require( 'vue' );
+var Header = require( './Header.vue' );
+var Footer = require( './Footer.vue' );
 
-new Vue( {
-	el: '#app',
-	/**
-	 *
-	 * @param {Function} createElement
-	 * @return {Vue.VNode}
-	 */
-	render: function ( createElement ) {
-		return createElement( App, {
-			props: Object.assign( {
-				autofocusInput: search === document.activeElement,
-				action: searchForm.getAttribute( 'action' ),
-				searchAccessKey: search.getAttribute( 'accessKey' ),
-				searchTitle: search.getAttribute( 'title' ),
-				searchPlaceholder: search.getAttribute( 'placeholder' ),
-				searchQuery: search.value
-			},
-			// Pass additional config from server.
-			config
-		} );
-	}
+function vueify( node, Component, mounted ) {
+	new Vue( {
+		el: node,
+		/**
+		 *
+		 * @param {Function} createElement
+		 * @return {Vue.VNode}
+		 */
+		render: function ( createElement ) {
+			return createElement( Component, {
+				props: Object.assign( {}, node.dataset )
+			} );
+		},
+		mounted: mounted
+	} );
+}
+
+$( function () {
+	vueify(
+		document.querySelector( 'header' ),
+		Header,
+		function () {
+			var header = this.$el;
+			document.body.addEventListener( 'click', function ( ev ) {
+				header.querySelectorAll( 'input[type=checkbox]' ).forEach( function ( node ) {
+					var forAttr = ev.target.getAttribute( 'for' );
+					if ( node !== ev.target && forAttr !== node.id ) {
+						node.checked = false;
+					}
+				} );
+			} );
+		}
+	);
+	
+	vueify(
+		document.querySelector( 'footer' ),
+		Footer
+	);
 } );
