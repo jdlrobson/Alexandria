@@ -1,0 +1,70 @@
+{
+  "name": "OpenLibrary",
+  "version": "1.0.0",
+  "namemsg": "skinname-openlibrary",
+  "descriptionmsg": "openlibrary-skin-desc",
+  "url": "https://www.mediawiki.org/wiki/Skin:OpenLibrary",
+  "author": [
+    "[https://skins.wmflabs.org skins.wmflabs.org v.1.0]"
+  ],
+  "type": "skin",
+  "requires": {
+    "MediaWiki": ">= 1.37.0"
+  },
+  "license-name": "GPL-2.0-or-later",
+  "manifest_version": 2,
+  "ValidSkinNames": {
+    "openlibrary": {
+      "class": "SkinMustache",
+      "args": [
+        {
+          "name": "OpenLibrary",
+          "templateDirectory": "skins/OpenLibrary/templates/",
+          "messages": [
+            "sitetitle",
+            "search",
+            "otherlanguages",
+            "tagline"
+          ],
+          "styles": [
+            "mediawiki.ui.icon",
+            "mediawiki.ui.button",
+            "skins.openlibrary.styles"
+          ],
+          "scripts": [
+            "skins.openlibrary"
+          ]
+        }
+      ]
+    }
+  },
+  "MessagesDirs": {
+    "OpenLibrary": [
+      "i18n"
+    ]
+  },
+  "ResourceFileModulePaths": {
+    "localBasePath": "",
+    "remoteSkinPath": "OpenLibrary"
+  },
+  "ResourceModules": {
+    "skins.openlibrary.styles": {
+      "class": "ResourceLoaderSkinModule",
+      "features": {
+        "normalize": true,
+        "content-tables": true,
+        "content-links": true,
+        "interface-category": true,
+        "toc": true
+      },
+      "styles": [
+        "resources/skin.less"
+      ]
+    },
+    "skins.openlibrary": {
+      "packageFiles": [
+        "resources/skin.js"
+      ]
+    }
+  }
+}
