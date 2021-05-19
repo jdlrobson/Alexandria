@@ -1,82 +1,85 @@
 {
-  "name": "OpenLibrary",
-  "version": "1.0.0",
-  "namemsg": "skinname-openlibrary",
-  "descriptionmsg": "openlibrary-skin-desc",
-  "url": "https://www.mediawiki.org/wiki/Skin:OpenLibrary",
-  "author": [
-    "[https://skins.wmflabs.org skins.wmflabs.org v.1.0]"
-  ],
-  "type": "skin",
-  "requires": {
-    "MediaWiki": ">= 1.37.0"
-  },
-  "license-name": "GPL-2.0-or-later",
-  "manifest_version": 2,
-  "ValidSkinNames": {
-    "openlibrary": {
-      "class": "SkinMustache",
-      "args": [
-        {
-          "name": "OpenLibrary",
-          "templateDirectory": "skins/OpenLibrary/templates/",
-          "messages": [
-            "searchsuggest-containing",
-            "tooltip-search",
-            "search",
-            "sitetitle",
-            "search",
-            "otherlanguages",
-            "tagline"
-          ],
-          "styles": [
-            "mediawiki.ui.icon",
-            "mediawiki.ui.button",
-            "skins.openlibrary.styles"
-          ],
-          "scripts": [
-            "skins.openlibrary"
-          ]
-        }
-      ]
-    }
-  },
-  "MessagesDirs": {
-    "OpenLibrary": [
-      "i18n"
-    ]
-  },
-  "ResourceFileModulePaths": {
-    "localBasePath": "",
-    "remoteSkinPath": "OpenLibrary"
-  },
-  "ResourceModules": {
-    "skins.openlibrary.styles": {
-      "targets": ["desktop", "mobile"],
-      "class": "ResourceLoaderSkinModule",
-      "features": {
-        "normalize": true,
-        "content-tables": true,
-        "content-links": true,
-        "interface-category": true,
-        "toc": true
-      },
-      "styles": [
-        "resources/skin.less"
-      ]
-    },
-    "skins.openlibrary": {
-      "targets": ["desktop", "mobile"],
-      "dependencies": [ "vue", "wvui" ],
-      "packageFiles": [
-        "resources/skin.js",
-        "resources/Article.vue",
-        "resources/Banner.vue",
-        "resources/Header.vue",
-        "resources/Footer.vue",
-        "resources/FooterMenu.vue",
-        "resources/DropdownMenu.vue"
-      ]
-    }
-  }
+	"name": "Alexandria",
+	"version": "1.0.0",
+	"namemsg": "skinname-alexandria",
+	"descriptionmsg": "alexandria-skin-desc",
+	"url": "https://www.mediawiki.org/wiki/Skin:Alexandria",
+	"author": [
+		"[https://skins.wmflabs.org skins.wmflabs.org v.1.0]"
+	],
+	"type": "skin",
+	"requires": {
+		"MediaWiki": ">= 1.37.0"
+	},
+	"license-name": "GPL-2.0-or-later",
+	"manifest_version": 2,
+	"ValidSkinNames": {
+		"alexandria": {
+			"class": "SkinMustache",
+			"args": [
+				{
+					"name": "Alexandria",
+					"templateDirectory": "skins/Alexandria/templates/",
+					"messages": [
+						"searchsuggest-containing",
+						"tooltip-search",
+						"search",
+						"sitetitle",
+						"search",
+						"otherlanguages",
+						"tagline"
+					],
+					"styles": [
+						"mediawiki.ui.icon",
+						"mediawiki.ui.button",
+						"skins.alexandria.styles"
+					],
+					"scripts": [
+						"skins.alexandria"
+					]
+				}
+			]
+		}
+	},
+	"MessagesDirs": {
+		"Alexandria": [
+			"i18n"
+		]
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "Alexandria"
+	},
+	"ResourceModules": {
+		"skins.alexandria.styles": {
+			"targets": [ "desktop", "mobile" ],
+			"class": "ResourceLoaderSkinModule",
+			"features": {
+				"normalize": true,
+				"content-thumbnails": true,
+				"content-tables": true,
+				"content-links": true,
+				"interface-category": true,
+				"toc": true
+			},
+			"styles": [
+				"resources/skin.less"
+			]
+		},
+		"skins.alexandria": {
+			"targets": [ "desktop", "mobile" ],
+			"dependencies": [ "vue", "wvui" ],
+			"packageFiles": [
+				"resources/skin.js",
+				"resources/App.vue",
+				"resources/AppArticle.vue",
+				"resources/AppBanner.vue",
+				"resources/AppHeader.vue",
+				"resources/AppFooter.vue",
+				"resources/Portlet.vue",
+				"resources/FooterMenu.vue",
+				"resources/DropdownMenu.vue"
+			]
+		}
+	}
 }

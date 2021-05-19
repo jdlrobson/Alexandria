@@ -1,4 +1,4 @@
 {
-  "skinname-openlibrary": "{{optional}}",
-  "openlibrary-desc": "{{desc|what=skin|name=OpenLibrary|url=https://www.mediawiki.org/wiki/Skin:OpenLibrary}}"
+	"skinname-alexandria": "{{optional}}",
+	"alexandria-desc": "{{desc|what=skin|name=Alexandria|url=https://www.mediawiki.org/wiki/Skin:Alexandria}}"
 }

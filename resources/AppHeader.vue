@@ -1,17 +1,21 @@
 <template>
 	<header id="header-bar" class="header-bar">
 		<div class="hamburger-component checkbox-menu">
-			<dropdown-menu label="Home" id="more">
-				<ul v-html="sidebar"></ul>
+			<dropdown-menu id="more" label="Home">
+				<ul v-html="htmlSidebar"></ul>
 			</dropdown-menu>
 		</div>
 
 		<div class="logo-component">
-			<a href="/" :title="tagline">
+			<a :href="mainpage" :title="tagline">
 				<div class="logo-txt">
-				<img v-if="logoSrc" class="logo-icon" :src="logoSrc" :alt="title"
-					:width="logoWidth" :height="logoHeight">
-				<h1 v-else>{{title}}</h1>
+					<img v-if="logoSrc"
+						class="logo-icon"
+						:src="logoSrc"
+						:alt="title"
+						:width="logoWidth"
+						:height="logoHeight">
+					<h1 v-else>{{ title }}</h1>
 				</div>
 			</a>
 		</div>
@@ -21,28 +25,63 @@
 			<typeahead-search
 				id="skin-ol-search"
 				:domain="domain"
-				initialInputValue=""
-				:buttonLabel="buttonLabel"
-				:formAction="formAction"
-				:footerSearchText="footerSearchText"
+				initial-input-value=""
+				:button-label="buttonLabel"
+				:form-action="formAction"
+				:footer-search-text="footerSearchText"
 				:focused="false"
-				showThumbnail
-				showDescription
+				show-thumbnail
+				show-description
 				:placeholder="placeholder"
-			/>
+			></typeahead-search>
 		</div>
 
-
 		<div class="account-component checkbox-menu">
-			<dropdown-menu label="My account" id="p-personal">
-				<ul v-html="userMenu"></ul>
-			</<dropdown-menu>
+			<dropdown-menu id="p-personal" label="My account">
+				<ul v-html="htmlUserMenu"></ul>
+			</dropdown-menu>
 		</div>
 	</header>
 </template>
 
+<script>
+const DropdownMenu = require( './DropdownMenu.vue' );
+const wvui = require( 'wvui' );
+
+module.exports = {
+	name: 'Header',
+	props: [
+		'title', 'tagline',
+		// logo
+		'logoSrc', 'logoWidth', 'logoHeight', 'mainpage',
+		// for search
+		'footerSearchText', 'placeholder', 'buttonLabel', 'formAction', 'domain',
+		// menus
+		'htmlUserMenu', 'htmlSidebar'
+	],
+	components: {
+		TypeaheadSearch: wvui.WvuiTypeaheadSearch,
+		DropdownMenu: DropdownMenu
+	}
+};
+</script>
+
 <style lang="less">
 header {
+	height: 61px;
+	max-width: 960px;
+	min-width: 300px;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	z-index: 1;
+	position: relative;
+	margin: 20px auto;
+	flex-direction: row;
+
+	h1 {
+		flex-grow: 1;
+	}
 
 	.hamburger-component {
 		order: 0;
@@ -52,7 +91,7 @@ header {
 			background-image: url(menu.png);
 		}
 	}
-	
+
 	.logo-component {
 		padding-right: 15px;
 		margin: 0 0 5px;
@@ -107,7 +146,6 @@ header {
 		}
 	}
 
-
 	label {
 		display: inline-block;
 		color: transparent;
@@ -131,7 +169,7 @@ header {
 			display: flex;
 			align-items: center;
 		}
-	
+
 		label {
 			background-color: #999;
 			background-image: url(avatar.png);
@@ -143,25 +181,3 @@ header {
 	}
 }
 </style>
-
-<script>
-var DropdownMenu = require( './DropdownMenu.vue' );
-var wvui = require( 'wvui' );
-
-module.exports = {
-	name: 'Header',
-	props: [
-		'title', 'tagline',
-		// logo
-		'logoSrc', 'logoWidth', 'logoHeight',
-		// for search
-		'footerSearchText', 'placeholder', 'buttonLabel', 'formAction', 'domain',
-		// menus
-		'userMenu', 'sidebar'
-	],
-	components: {
-		TypeaheadSearch: wvui.WvuiTypeaheadSearch,
-		DropdownMenu: DropdownMenu
-	}
-};
-</script>
