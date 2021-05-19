@@ -21,6 +21,9 @@
           "name": "OpenLibrary",
           "templateDirectory": "skins/OpenLibrary/templates/",
           "messages": [
+            "searchsuggest-containing",
+            "tooltip-search",
+            "search",
             "sitetitle",
             "search",
             "otherlanguages",
@@ -49,6 +52,7 @@
   },
   "ResourceModules": {
     "skins.openlibrary.styles": {
+      "targets": ["desktop", "mobile"],
       "class": "ResourceLoaderSkinModule",
       "features": {
         "normalize": true,
@@ -62,11 +66,15 @@
       ]
     },
     "skins.openlibrary": {
+      "targets": ["desktop", "mobile"],
       "dependencies": [ "vue", "wvui" ],
       "packageFiles": [
         "resources/skin.js",
+        "resources/Article.vue",
+        "resources/Banner.vue",
         "resources/Header.vue",
         "resources/Footer.vue",
+        "resources/FooterMenu.vue",
         "resources/DropdownMenu.vue"
       ]
     }

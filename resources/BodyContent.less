@@ -11,13 +11,40 @@
   margin: 7px 2px 20px;
 }
 
-.mw-body-content {
-  @import 'editsection.less';
+@import 'editsection.less';
 
+.mw-body-content {
+
+  font-size: 13px;
+
+  h1,h2,h3,h4,h5 {
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    clear: both;
+    font-size: 1.375em;
+  }
+
+  h3 {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  h4 {
+    font-size: .8125em;
+  }
+
+  h5 {
     font-size: 13px;
+    text-transform: uppercase;
+  }
 }
-  
-  /*
+
+/*
+  .mw-parser-output,
   section {
     display: grid;
     grid-template-columns: 400px auto;
@@ -27,36 +54,29 @@
   }
   
   
-  section > .toc,
-  section > .thumb,
-  section > table,
-  section > div,
-  section >  .infobox {
+  .mw-parser-output >.toc,
+  .mw-parser-output >.thumb,
+  .mw-parser-output >table,
+  .mw-parser-output >div,
+  .mw-parser-output > .infobox {
     grid-column-start: 1;
     grid-column-end: 2;
     align-self: start;
   }
   
-  section >  .infobox {
+  .mw-parser-output > .infobox {
     //grid-row: 1;
   }
   
-  section > .toc {
+  .mw-parser-output >.toc {
     //grid-row: 2;
   }
   
   
-  section > div.hatnote,
-  section > * {
+  .mw-parser-output >div.hatnote,
+  .mw-parser-output >* {
     grid-column-start: 2;
     grid-column-end: 3;
   }
  
-  
-.mw-parser-output {
-//display: flex;
-}
-
-.infobox {
-float: left !important;
-} */
+*/

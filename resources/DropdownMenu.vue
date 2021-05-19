@@ -6,9 +6,7 @@
 		<input role="button" type="checkbox" class="navigation-component__checkbox"
 			:id="id">
 		<div class="navigation-dropdown-component">
-			<ul>
-				<slot></slot>
-			</ul>
+			<slot></slot>
 		</div>
 	</li>
 </template>
@@ -39,11 +37,11 @@
 	.navigation-component__checkbox {
 		opacity: 0;
 
-		~ .navigation-dropdown-component ul {
+		~ .navigation-dropdown-component > ul {
 			display: none;
 		}
 
-		&:checked ~ .navigation-dropdown-component ul {
+		&:checked ~ .navigation-dropdown-component > ul {
 			display: block;
 		}
 	}
@@ -51,11 +49,11 @@
 	.navigation-dropdown-component {
 		position: relative;
 
-		ul {
+		> ul {
+			z-index: 1;
 			position: absolute;
 			text-align: right;
 			padding-top: 5px;
-			right: 11px;
 			text-align: left;
 			background-color: #f2f0e7;
 			border: 1px solid #babbae;
@@ -65,7 +63,7 @@
 			padding: 0;
 		}
 
-		li {
+		> ul > li {
 			padding: 10px 20px 10px 10px;
 			border-bottom: 1px solid #dfe0cb;
 		}
