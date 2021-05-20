@@ -58,6 +58,14 @@ module.exports = {
 	.navigation-dropdown-component {
 		position: relative;
 
+		ul {
+			list-style: none;
+		}
+
+		ul ul li {
+			display: inline-block;
+		}
+
 		> ul {
 			z-index: 1;
 			position: absolute;
@@ -67,7 +75,6 @@ module.exports = {
 			background-color: #f2f0e7;
 			border: 1px solid #babbae;
 			border-radius: 3px;
-			list-style: none;
 			cursor: pointer;
 			padding: 0;
 		}

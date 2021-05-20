@@ -13,9 +13,12 @@
 	},
 	"license-name": "GPL-2.0-or-later",
 	"manifest_version": 2,
+	"AutoloadClasses": {
+		"SkinAlexandria": "SkinAlexandria.php"
+	},
 	"ValidSkinNames": {
 		"alexandria": {
-			"class": "SkinMustache",
+			"class": "SkinAlexandria",
 			"args": [
 				{
 					"name": "Alexandria",

@@ -34,6 +34,24 @@ const Article = require( './AppArticle.vue' );
 const Banner = require( './AppBanner.vue' );
 const Footer = require( './AppFooter.vue' );
 
+
+function mapAllKeysRecursive( json ) {
+	const newObj = {};
+	Object.keys( json ).forEach( function ( key ) {
+		const newKey = getVueKey( key );
+		if ( !json[ key ] ) {
+			newObj[ newKey ] = undefined;
+		} else if ( Array.isArray( json[ key ] ) ) {
+			newObj[ newKey ] = json[ key ];
+		} else if ( typeof json[ key ] === 'object' ) {
+			newObj[ newKey ] = mapAllKeysRecursive( json[ key ] );
+		} else {
+			newObj[ newKey ] = json[ key ];
+		}
+	} );
+	return newObj;
+}
+
 function toCamelCase( str ) {
 	return str.replace( /-([a-z])/g, function ( g ) {
 		return g[ 1 ].toUpperCase();
@@ -48,8 +66,9 @@ function getVueKey( key ) {
 
 module.exports = {
 	name: 'App',
+	props: [ 'initialData' ],
 	data: function () {
-		return {
+		return Object.assign( {
 			domain: window.location.host,
 			msgTagline: undefined,
 			linkMainpage: undefined,
@@ -99,7 +118,7 @@ module.exports = {
 			htmlTitle: '',
 			htmlSubtitle: '',
 			htmlBodyContent: ''
-		};
+		}, mapAllKeysRecursive( this.initialData ) );
 	},
 	components: {
 		AppHeader: Header,
@@ -132,24 +151,6 @@ module.exports = {
 	methods: {
 		renderArticle: function ( title ) {
 
-			function mapAllKeysRecursive( json ) {
-				const newObj = {};
-				Object.keys( json ).forEach( function ( key ) {
-					const newKey = getVueKey( key );
-					if ( !json[ key ] ) {
-						newObj[ newKey ] = undefined;
-					} else if ( Array.isArray( json[ key ] ) ) {
-						newObj[ newKey ] = json[ key ];
-					} else if ( typeof json[ key ] === 'object' ) {
-						newObj[ newKey ] = mapAllKeysRecursive( json[ key ] );
-					} else {
-						newObj[ newKey ] = json[ key ];
-					}
-				} );
-				return newObj;
-			}
-
-					console.log('render', title)
 			fetch(
 				mw.config.get( 'wgArticlePath' ).replace( '$1', title + '?useskin=alexandria&useformat=json' )
 			).then( function ( resp ) {
@@ -195,7 +196,6 @@ module.exports = {
 				}
 			}
 		}.bind( this ) );
-		this.renderArticle( mw.config.get( 'wgPageName' ) );
 	}
 };
 </script>
