@@ -1,29 +1,30 @@
 <template>
 	<div id="ol-app">
-		<app-banner :html="htmlSiteNotice"></app-banner>
+		<app-banner :html="htmlSiteNotice"
+			:html-notifications="dataPortlets.dataNotifications.htmlItems"></app-banner>
 		<app-header
-			:logo-width="logos.wordmark.width"
-			:logo-height="logos.wordmark.height"
-			:logo-src="logos.wordmark.src"
+			:logo-width="dataLogos.wordmark.width"
+			:logo-height="dataLogos.wordmark.height"
+			:logo-src="dataLogos.wordmark.src"
 			:tagline="msgTagline"
 			:mainpage="linkMainpage"
-			:form-action="searchBox.formAction"
+			:form-action="dataSearchBox.formAction"
 			:title="msgSitetitle"
 			:placeholder="msgTooltipSearch"
 			:button-label="msgSearch"
 			:footer-search-text="msgSearchsuggestContaining"
-			:html-user-menu="computedUserMenu"
-			:html-sidebar="computedSidebar"
+			:html-user-menu="dataPortlets.dataUserMenu.htmlItems"
+			:html-sidebar="alexSidebar"
 		></app-header>
 		<app-article
 			:tagline="msgTagline"
 			:html="htmlBodyContent"
 			:title="htmlTitle"
 			:subtitle="htmlSubtitle"
-			:menu="portlets.views"
+			:menu="dataPortlets.dataViews"
 		></app-article>
-		<app-footer :blurb="computedBlurb"
-			:menu="footer.places"
+		<app-footer :blurb="alexFooterIcons"
+			:menu="dataFooter.dataPlaces"
 			:heading="msgSitetitle"></app-footer>
 	</div>
 </template>
@@ -59,8 +60,6 @@ function toCamelCase( str ) {
 }
 
 function getVueKey( key ) {
-	key = key.replace( /^data-/, '' );
-	key = key.replace( /^array-/, '' );
 	return toCamelCase( key );
 }
 
@@ -69,6 +68,8 @@ module.exports = {
 	props: [ 'initialData' ],
 	data: function () {
 		return Object.assign( {
+			alexFooterIcons: undefined,
+			alexSidebar: undefined,
 			domain: window.location.host,
 			msgTagline: undefined,
 			linkMainpage: undefined,
@@ -76,36 +77,32 @@ module.exports = {
 			msgTooltipSearch: undefined,
 			msgSearch: undefined,
 			msgSearchsuggestContaining: undefined,
-			searchBox: {
+			dataSearchBox: {
 				formAction: undefined
 			},
-			logos: {
+			dataLogos: {
 				wordmark: {
 					src: undefined,
 					width: undefined,
 					height: undefined
 				}
 			},
-			footer: {
-				icons: {
+			dataFooter: {
+				dataPlaces: {
 					items: []
-				},
-				places: {
-					items: []
-				},
-				html: ''
+				}
 			},
-			portlets: {
-				views: {},
-				notifications: {
+			dataPortlets: {
+				dataViews: {},
+				dataNotifications: {
 					htmlItems: ''
 				},
-				userMenu: {
+				dataUserMenu: {
 					htmlItems: ''
 				}
 			},
-			portletsSidebar: {
-				portletsFirst: {
+			dataPortletsSidebar: {
+				dataPortletsFirst: {
 					htmlItems: ''
 				},
 				portletsRest: []
@@ -125,28 +122,6 @@ module.exports = {
 		AppArticle: Article,
 		AppBanner: Banner,
 		AppFooter: Footer
-	},
-	computed: {
-		computedBlurb: function () {
-			return this.footer.icons.items.map( function ( item ) {
-				return item.html;
-			} ).join( '' );
-		},
-		computedSidebar: function () {
-			const p = this.portletsSidebar;
-			return String( p.portletsFirst.htmlItems ) + p.portletsRest.map( function ( r ) {
-				return r.htmlItems;
-			} );
-		},
-		computedUserMenu: function () {
-			const userMenu = this.portlets.userMenu ? this.portlets.userMenu.htmlItems : '',
-				n = this.portlets.notifications;
-			if ( n ) {
-				return '<li><ul class="' + n.class + '" id="' + n.id + '">' + n.htmlItems + '</ul></li>' + userMenu;
-			} else {
-				return userMenu;
-			}
-		}
 	},
 	methods: {
 		renderArticle: function ( title ) {

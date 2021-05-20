@@ -3,7 +3,7 @@
 		<div class="footer__content">
 			<div class="footer__menus">
 				<footer-menu :id="menu.item" :heading="heading">
-					<li v-for="( m ) in menu.items"
+					<li v-for="( m ) in menu.arrayItems"
 						:id="m.id"
 						:key="m.id"
 						v-html="m.html"></li>
