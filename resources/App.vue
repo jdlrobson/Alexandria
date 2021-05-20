@@ -66,7 +66,7 @@ function getVueKey( key ) {
 module.exports = {
 	name: 'App',
 	props: [ 'initialData' ],
-	data: function () {
+	data() {
 		return Object.assign( {
 			alexFooterIcons: undefined,
 			alexSidebar: undefined,
@@ -128,19 +128,15 @@ module.exports = {
 
 			fetch(
 				mw.config.get( 'wgArticlePath' ).replace( '$1', title + '?useskin=alexandria&useformat=json' )
-			).then( function ( resp ) {
-				return resp.json();
-			}, function ( resp ) {
-				return resp.json();
-			} ).then( function ( json ) {
+			).then( ( resp ) => resp.json() ).then( ( json ) => {
 				json = mapAllKeysRecursive( json );
 
 				console.log(json);
-				Object.keys( json ).forEach( function ( key ) {
+				Object.keys( json ).forEach( ( key ) => {
 					const newKey = getVueKey( key );
 					this[ newKey ] = json[ key ];
-				}.bind( this ) );
-			}.bind( this ) );
+				} );
+			} );
 		}
 	},
 	/**
@@ -150,8 +146,8 @@ module.exports = {
 		const header = this.$el.querySelector( 'header' );
 		const article = this.$el.querySelector('article');
 
-		document.body.addEventListener( 'click', function ( ev ) {
-			header.querySelectorAll( 'input[type=checkbox]' ).forEach( function ( node ) {
+		document.body.addEventListener( 'click', ( ev ) => {
+			header.querySelectorAll( 'input[type=checkbox]' ).forEach( ( node ) => {
 				const forAttr = ev.target.getAttribute( 'for' );
 				if ( node !== ev.target && forAttr !== node.id ) {
 					node.checked = false;
@@ -160,7 +156,7 @@ module.exports = {
 		} );
 
 		// Redirect links
-		article.addEventListener( 'click', function ( ev ) {
+		article.addEventListener( 'click', ( ev ) => {
 			var title;
 			if ( ev.target.tagName === 'A' ) {
 				ev.preventDefault();
@@ -170,7 +166,7 @@ module.exports = {
 					this.renderArticle(title);
 				}
 			}
-		}.bind( this ) );
+		} );
 	}
 };
 </script>

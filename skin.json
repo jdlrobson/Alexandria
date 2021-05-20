@@ -72,6 +72,7 @@
 		"skins.alexandria": {
 			"targets": [ "desktop", "mobile" ],
 			"dependencies": [ "vue", "wvui" ],
+			"es6": true,
 			"packageFiles": [
 				"resources/skin.js",
 				"resources/App.vue",
