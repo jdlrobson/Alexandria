@@ -24,6 +24,7 @@ class SkinAlexandria extends SkinMustache {
         }
 
         return $data + [
+            'alex-data-wordmark' => $data['data-logos']['data-wordmark'] ?? [],
             'data-json' => json_encode( $data ),
         ];
     }

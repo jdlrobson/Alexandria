@@ -3,9 +3,9 @@
 		<app-banner
 			:html-notifications="dataPortlets.dataNotifications.htmlItems"></app-banner>
 		<app-header
-			:logo-width="dataLogos.wordmark.width"
-			:logo-height="dataLogos.wordmark.height"
-			:logo-src="dataLogos.wordmark.src"
+			:logo-width="alexDataWordmark.width"
+			:logo-height="alexDataWordmark.height"
+			:logo-src="alexDataWordmark.src"
 			:tagline="msgTagline"
 			:mainpage="linkMainpage"
 			:form-action="dataSearchBox.formAction"
@@ -82,12 +82,10 @@ module.exports = {
 			dataSearchBox: {
 				formAction: undefined
 			},
-			dataLogos: {
-				wordmark: {
-					src: undefined,
-					width: undefined,
-					height: undefined
-				}
+			alexDataWordmark: {
+				src: undefined,
+				width: undefined,
+				height: undefined
 			},
 			dataFooter: {
 				dataPlaces: {
