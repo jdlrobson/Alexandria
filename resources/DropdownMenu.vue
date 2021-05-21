@@ -77,6 +77,9 @@ module.exports = {
 			border-radius: 3px;
 			cursor: pointer;
 			padding: 0;
+			max-height: 200px;
+			max-height: 70vh;
+			overflow: scroll;
 		}
 
 		> ul > li {
