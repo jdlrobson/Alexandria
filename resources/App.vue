@@ -131,7 +131,6 @@ module.exports = {
 	},
 	methods: {
 		renderArticle: function ( title ) {
-
 			fetch(
 				mw.config.get( 'wgArticlePath' ).replace( '$1', title + '?useskin=alexandria&useformat=json' )
 			).then( ( resp ) => resp.json() ).then( ( json ) => {
@@ -165,10 +164,11 @@ module.exports = {
 		article.addEventListener( 'click', ( ev ) => {
 			var title;
 			if ( ev.target.tagName === 'A' ) {
-				ev.preventDefault();
 				title = ev.target.getAttribute('title');
-				if (title) {
+				// Article fetching via ajax only supported for article pages
+				if (title && title.indexOf(':') === -1) {
 					// Fetch the new article;
+					ev.preventDefault();
 					this.renderArticle(title);
 				}
 			}
