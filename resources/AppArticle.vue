@@ -276,6 +276,7 @@ table.infobox {
 			float: right;
 		}
 
+		> figure,
 		> .thumb,
 		> table.infobox {
 			// stylelint-disable-next-line declaration-no-important
@@ -291,12 +292,14 @@ table.infobox {
 			float: left;
 		}
 
+		> figure,
 		> .thumb {
 			width: 300px;
 			text-align: center;
 			clear: none;
 		}
 
+		> figure, ~ .tright,
 		> .infobox ~ .tright,
 		> .thumb ~ .tright {
 			float: right;
@@ -318,6 +321,12 @@ table.infobox {
 			float: none !important;
 			// stylelint-disable-next-line declaration-no-important
 			width: 100% !important;
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			clear: both;
 		}
 	}
 
