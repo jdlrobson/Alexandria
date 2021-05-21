@@ -21,7 +21,6 @@
 		</div>
 
 		<div class="search-component">
-			<!-- todo: domain is hardcoded -->
 			<typeahead-search
 				id="skin-ol-search"
 				:domain="domain"

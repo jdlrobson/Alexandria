@@ -25,7 +25,7 @@
 			"args": [
 				{
 					"name": "alexandria",
-					"templateDirectory": "skins/Alexandria/templates/",
+					"templateDirectory": "skins/Alexandria/resources/dist/",
 					"messages": [
 						"searchsuggest-containing",
 						"tooltip-search",
