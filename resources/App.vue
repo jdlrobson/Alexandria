@@ -157,12 +157,34 @@ module.exports = {
 			} );
 		} );
 
+		const getClosestLink = (node) => {
+			if (node.tagName === 'BODY') {
+				return false;
+			} else if (node.tagName === 'A') {
+				return node;
+			} else {
+				return getClosestLink(node.parentNode);
+			}
+		}
+
 		// Redirect links
-		article.addEventListener( 'click', ( ev ) => {
+		const clickHandler = ( ev ) => {
+			const closestLink = getClosestLink( ev.target );
 			let title;
-			if ( ev.target.tagName === 'A' ) {
-				title = ev.target.getAttribute( 'title' );
+			if ( closestLink ) {
+				ev.preventDefault();
+				href = closestLink.getAttribute('href');
+				if (href.indexOf('search=') > -1) {
+					const m = href.match(/search\=([^&]*)/);
+					if(m) {
+						title = m[1];
+					}
+				} else {
+					title = closestLink.getAttribute( 'title' );
+				}
+
 				// Article fetching via ajax only supported for article pages and pages without query strings.
+
 				if ( title && title.indexOf( ':' ) === -1 && title.indexOf( '?' ) === -1 ) {
 					// Fetch the new article;
 					ev.preventDefault();
@@ -189,7 +211,9 @@ module.exports = {
 					} );
 				}
 			}
-		} );
+		};
+		article.addEventListener( 'click', clickHandler );
+		header.querySelector('.search-component').addEventListener( 'click', clickHandler );
 		window.addEventListener( 'popstate', ( ev ) => {
 			const state = ev.state;
 
