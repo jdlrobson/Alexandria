@@ -55,7 +55,7 @@ module.exports = {
 		text-align: right;
 		margin-top: 3px 0 0;
 		font-size: 11px;
-		font-weight: 400;
+		font-weight: normal;
 		color: #615132;
 		list-style: none;
 		padding: 0;
@@ -74,7 +74,7 @@ module.exports = {
 	}
 
 	h1 {
-		font-family: Georgia,"Palatino Linotype","Book Antiqua",Palatino,serif;
+		font-family: 'Georgia', 'Palatino Linotype', 'Book Antiqua', 'Palatino', serif;
 		margin: 10px 0 0;
 		color: #333;
 		font-size: 2em;
@@ -88,13 +88,13 @@ module.exports = {
 	pre {
 		max-height: 200px;
 		overflow: scroll;
-		font: 11px/15px "Menlo","Consolas","Monaco",monospace;
-		background: rgba(71,87,120,0.08);
+		font: 11px/15px 'Menlo', 'Consolas', 'Monaco', monospace;
+		background: rgba( 71, 87, 120, 0.08 );
 		display: block;
 		color: #000;
 		border-radius: 3px;
 		white-space: pre-wrap;
-		border-color: rgb(0, 0, 0);
+		border-color: #000;
 		padding: 12px;
 	}
 
@@ -112,12 +112,35 @@ module.exports = {
 		color: #02598b;
 	}
 
-	a:hover, a:visited {
+	a:hover,
+	a:visited {
 		color: #003266;
 	}
 }
 
-@import 'editsection.less';
+.mw-editsection-divider,
+.mw-editsection-bracket {
+	display: none;
+}
+
+.mw-editsection {
+	float: right;
+}
+
+#ca-ve-edit a,
+#ca-edit a,
+.mw-editsection a {
+	text-decoration: none;
+	color: #666;
+	border: 1px solid #999;
+	border-radius: 5px;
+	background: #fff;
+	padding: 10px;
+	display: inline-block;
+	font-size: 16px;
+	line-height: normal;
+	margin-left: 8px;
+}
 
 .mw-body-content {
 	font-size: 13px;
@@ -151,6 +174,18 @@ module.exports = {
 		text-transform: uppercase;
 	}
 }
-@import 'wiki-template-styles.less';
 
+// Wikitemplate styles
+.hatnote {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	margin: 20px 0 10px;
+	padding: 17px 0;
+}
+
+.article__subtitle {
+	font-style: oblique;
+	color: #666;
+	margin: 7px 2px 20px;
+}
 </style>

@@ -74,9 +74,8 @@ module.exports = {
 	flex-flow: row wrap;
 	align-items: center;
 	z-index: 1;
-	position: relative;
-	margin: 20px auto;
 	position: sticky;
+	margin: 20px auto;
 	top: 40px;
 	background: #e1dcc5;
 
@@ -89,7 +88,7 @@ module.exports = {
 		margin-right: 5px;
 
 		label {
-			background-image: url(menu.png);
+			background-image: url( menu.png );
 		}
 	}
 
@@ -124,15 +123,15 @@ module.exports = {
 			width: 207px;
 			display: inline-block;
 			border: 1px solid #babbae;
-			border-radius: .3em;
+			border-radius: 0.3em;
 			background-color: #f9f9f9;
 			position: relative;
 
 			.search-bar {
-					transition: all .2s;
-					background: #f9f9f9;
-					border-radius: .3em;
-					display: flex;
+				transition: all 0.2s;
+				background: #f9f9f9;
+				border-radius: 0.3em;
+				display: flex;
 			}
 		}
 
@@ -150,7 +149,7 @@ module.exports = {
 	label {
 		display: inline-block;
 		color: transparent;
-		border: none;
+		border: 0;
 		margin-right: 5px;
 		background-size: cover;
 		background-position: center;
@@ -173,7 +172,7 @@ module.exports = {
 
 		label {
 			background-color: #999;
-			background-image: url(avatar.png);
+			background-image: url( avatar.png );
 		}
 
 		ul {

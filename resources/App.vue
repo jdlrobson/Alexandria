@@ -41,11 +41,16 @@ const Article = require( './AppArticle.vue' );
 const Banner = require( './AppBanner.vue' );
 const Footer = require( './AppFooter.vue' );
 
+function toCamelCase( str ) {
+	return str.replace( /-([a-z])/g, function ( g ) {
+		return g[ 1 ].toUpperCase();
+	} );
+}
 
 function mapAllKeysRecursive( json ) {
 	const newObj = {};
 	Object.keys( json ).forEach( function ( key ) {
-		const newKey = getVueKey( key );
+		const newKey = toCamelCase( key );
 		if ( !json[ key ] ) {
 			newObj[ newKey ] = undefined;
 		} else if ( Array.isArray( json[ key ] ) ) {
@@ -57,16 +62,6 @@ function mapAllKeysRecursive( json ) {
 		}
 	} );
 	return newObj;
-}
-
-function toCamelCase( str ) {
-	return str.replace( /-([a-z])/g, function ( g ) {
-		return g[ 1 ].toUpperCase();
-	} );
-}
-
-function getVueKey( key ) {
-	return toCamelCase( key );
 }
 
 module.exports = {
@@ -140,7 +135,7 @@ module.exports = {
 				json = mapAllKeysRecursive( json );
 				this.appClass = '';
 				Object.keys( json ).forEach( ( key ) => {
-					const newKey = getVueKey( key );
+					const newKey = toCamelCase( key );
 					this[ newKey ] = json[ key ];
 				} );
 			} );
@@ -151,7 +146,7 @@ module.exports = {
 	 */
 	mounted: function () {
 		const header = this.$el.querySelector( 'header' );
-		const article = this.$el.querySelector('article');
+		const article = this.$el.querySelector( 'article' );
 
 		document.body.addEventListener( 'click', ( ev ) => {
 			header.querySelectorAll( 'input[type=checkbox]' ).forEach( ( node ) => {
@@ -164,51 +159,50 @@ module.exports = {
 
 		// Redirect links
 		article.addEventListener( 'click', ( ev ) => {
-			var title;
+			let title;
 			if ( ev.target.tagName === 'A' ) {
-				title = ev.target.getAttribute('title');
+				title = ev.target.getAttribute( 'title' );
 				// Article fetching via ajax only supported for article pages and pages without query strings.
-				if (title && title.indexOf(':') === -1 && title.indexOf('?') === -1) {
+				if ( title && title.indexOf( ':' ) === -1 && title.indexOf( '?' ) === -1 ) {
 					// Fetch the new article;
 					ev.preventDefault();
 					const scrollY = window.scrollY;
 					const path = window.location.pathname;
 					// update scroll position of current page
-					history.replaceState({
+					history.replaceState( {
 						path,
 						scrollY
 					}, document.title, path );
 
 					const newPath = mw.config.get( 'wgArticlePath' ).replace( '$1', title );
 					// New page, jump to top.
-					window.scrollTo({
+					window.scrollTo( {
 						top: 0,
 						left: 0,
 						behavior: 'smooth'
-					});
-					this.renderArticle(newPath).then(() => {
-						history.pushState({
+					} );
+					this.renderArticle( newPath ).then( () => {
+						history.pushState( {
 							path: newPath,
 							scrollY: 0
 						}, title, newPath );
-					});
+					} );
 				}
 			}
 		} );
-		window.addEventListener('popstate', (ev) => {
+		window.addEventListener( 'popstate', ( ev ) => {
 			const state = ev.state;
 
-			this.renderArticle(state.path).then(() => {
-				this.$nextTick(() => {
-					window.scrollTo({
+			this.renderArticle( state.path ).then( () => {
+				this.$nextTick( () => {
+					window.scrollTo( {
 						top: state.scrollY,
 						left: 0
-					});
-				})
-			})
+					} );
+				} );
+			} );
 
-
-		});
+		} );
 	}
 };
 </script>

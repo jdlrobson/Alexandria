@@ -15,7 +15,7 @@ throw new Error( 'Do not use in frontend' );
 </script>
 
 <style lang="less">
-    .client-js .alex-fallback-search {
-        display: none;
-    }
+	.client-js .alex-fallback-search {
+		display: none;
+	}
 </style>

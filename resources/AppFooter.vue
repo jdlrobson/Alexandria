@@ -30,7 +30,7 @@ module.exports = {
 footer {
 	display: flex;
 	width: 100%;
-	font-size: .8em;
+	font-size: 0.8em;
 
 	ul {
 		padding: 0;
@@ -40,7 +40,7 @@ footer {
 		border: 0;
 		border-top: 1px solid #babbae;
 		margin: 20px 0;
-		background: hsla(48,33%,83%,.66);
+		background: hsla( 48, 33%, 83%, 0.66 );
 		height: 1px;
 		box-sizing: border-box;
 	}

@@ -29,8 +29,7 @@ module.exports = {
 	li {
 		display: inline-block;
 		margin-left: 10px;
-
-		filter: invert(1);
+		filter: invert( 1 );
 		opacity: 1;
 	}
 
@@ -44,7 +43,7 @@ module.exports = {
 	padding: 5px;
 	height: 40px;
 	position: sticky;
-	top: 0px;
+	top: 0;
 	z-index: 1;
 
 	> div {
