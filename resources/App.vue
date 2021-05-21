@@ -17,6 +17,7 @@
 			:html-sidebar="alexSidebar"
 		></app-header>
 		<app-article
+			:class="appClass"
 			:banner="htmlSiteNotice"
 			:lastmodified="alexLastmod"
 			:tagline="msgTagline"
@@ -73,6 +74,7 @@ module.exports = {
 	props: [ 'initialData' ],
 	data() {
 		return Object.assign( {
+			appClass: '',
 			alexFooterIcons: undefined,
 			alexSidebar: undefined,
 			alexLastMod: '',
@@ -130,13 +132,13 @@ module.exports = {
 		AppFooter: Footer
 	},
 	methods: {
-		renderArticle: function ( title ) {
-			fetch(
-				mw.config.get( 'wgArticlePath' ).replace( '$1', title + '?useskin=alexandria&useformat=json' )
+		renderArticle: function ( path ) {
+			this.appClass = 'app__loading';
+			return fetch(
+				`${path}?useskin=alexandria&useformat=json`
 			).then( ( resp ) => resp.json() ).then( ( json ) => {
 				json = mapAllKeysRecursive( json );
-
-				console.log(json);
+				this.appClass = '';
 				Object.keys( json ).forEach( ( key ) => {
 					const newKey = getVueKey( key );
 					this[ newKey ] = json[ key ];
@@ -165,14 +167,48 @@ module.exports = {
 			var title;
 			if ( ev.target.tagName === 'A' ) {
 				title = ev.target.getAttribute('title');
-				// Article fetching via ajax only supported for article pages
-				if (title && title.indexOf(':') === -1) {
+				// Article fetching via ajax only supported for article pages and pages without query strings.
+				if (title && title.indexOf(':') === -1 && title.indexOf('?') === -1) {
 					// Fetch the new article;
 					ev.preventDefault();
-					this.renderArticle(title);
+					const scrollY = window.scrollY;
+					const path = window.location.pathname;
+					// update scroll position of current page
+					history.replaceState({
+						path,
+						scrollY
+					}, document.title, path );
+
+					const newPath = mw.config.get( 'wgArticlePath' ).replace( '$1', title );
+					// New page, jump to top.
+					window.scrollTo({
+						top: 0,
+						left: 0,
+						behavior: 'smooth'
+					});
+					this.renderArticle(newPath).then(() => {
+						history.pushState({
+							path: newPath,
+							scrollY: 0
+						}, title, newPath );
+					});
 				}
 			}
 		} );
+		window.addEventListener('popstate', (ev) => {
+			const state = ev.state;
+
+			this.renderArticle(state.path).then(() => {
+				this.$nextTick(() => {
+					window.scrollTo({
+						top: state.scrollY,
+						left: 0
+					});
+				})
+			})
+
+
+		});
 	}
 };
 </script>
@@ -189,5 +225,11 @@ body {
 	font-family: 'Lucida Grande', 'Verdana', 'Geneva', 'Helvetica', 'Arial', sans-serif;
 	padding: 0;
 	margin: 0;
+}
+
+.app__loading {
+	height: 100%;
+	overflow: hidden;
+	opacity: 0.3;
 }
 </style>
