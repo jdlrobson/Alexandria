@@ -147,7 +147,7 @@ module.exports = {
 								/^<body[^>]*>/, ''
 							);
 							return Promise.resolve( {
-								'html-title': title,
+								'html-title': decodeURIComponent( title ),
 								'alex-last-mod': '',
 								'html-subtitle': '',
 								'html-body-content': bodyContentHtml,
