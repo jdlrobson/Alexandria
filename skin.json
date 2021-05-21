@@ -26,6 +26,7 @@
 				{
 					"name": "alexandria",
 					"templateDirectory": "skins/Alexandria/resources/dist/",
+					"responsive": true,
 					"messages": [
 						"searchsuggest-containing",
 						"tooltip-search",
