@@ -74,7 +74,7 @@
 				"content-tables": true,
 				"content-links": true,
 				"interface-category": true,
-				"toc": true
+				"toc": false
 			},
 			"styles": [
 				"resources/skin.less"

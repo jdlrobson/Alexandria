@@ -11,8 +11,8 @@
 				:class="menuClass"
 				:html="menuHtmlItems"></portlet>
 		</header>
-		<div v-html="banner"></div>
-		<div v-html="html"></div>
+		<div role="banner" v-html="banner"></div>
+		<main v-html="html"></main>
 	</article>
 </template>
 
@@ -102,6 +102,7 @@ module.exports = {
 		display: flex;
 		flex-flow: row wrap;
 		align-items: center;
+		margin-bottom: 10px;
 
 		h1 {
 			flex-grow: 1;
@@ -142,7 +143,7 @@ module.exports = {
 	margin-left: 8px;
 }
 
-.mw-body-content {
+.mw-parser-output {
 	font-size: 13px;
 
 	h1,
@@ -173,19 +174,163 @@ module.exports = {
 		font-size: 13px;
 		text-transform: uppercase;
 	}
+
+	p {
+		margin: 0;
+	}
+
+	p + p {
+		margin-top: 13px;
+	}
 }
 
 // Wikitemplate styles
+.redirectMsg,
+.ambox,
 .hatnote {
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	margin: 20px 0 10px;
 	padding: 17px 0;
+
+	~ .ambox,
+	~ .hatnote {
+		margin-top: 0;
+	}
+}
+
+.ambox {
+	font-size: 12px;
 }
 
 .article__subtitle {
 	font-style: oblique;
 	color: #666;
 	margin: 7px 2px 20px;
+}
+
+.toccolours,
+#coordinates,
+#toc {
+	display: none;
+}
+
+.mw-parser-output {
+	.reflist,
+	ul {
+		max-height: 400px;
+		overflow: scroll;
+	}
+}
+
+// https://phabricator.wikimedia.org/T283396
+.thumb {
+	margin-top: 10px;
+
+	.magnify {
+		display: none;
+	}
+
+	.thumbimage,
+	.thumbinner {
+		border: 0;
+		background: transparent;
+	}
+
+	.thumbcaption {
+		text-align: center;
+	}
+}
+
+table.infobox {
+	display: block;
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+
+	tr,
+	td,
+	tbody {
+		display: block;
+	}
+
+	li {
+		list-style: none;
+	}
+
+	.infobox-image {
+		text-align: center;
+	}
+}
+
+@media all and ( min-width: 600px ) {
+	// treat every 3rd item as row
+	.row,
+	section:first-child {
+		position: relative;
+
+		> * {
+			width: ~'calc(100% - 322px)';
+			float: right;
+		}
+
+		> .thumb,
+		> table.infobox {
+			// stylelint-disable-next-line declaration-no-important
+			width: 295px !important;
+			line-height: 1.5em;
+			font-size: 1em;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			min-height: 200px;
+			margin: 0 1.5em 10px 0;
+			border-radius: 5px;
+			padding: 15px;
+			float: left;
+		}
+
+		> .thumb {
+			width: 300px;
+			text-align: center;
+			clear: none;
+		}
+
+		> .infobox ~ .tright,
+		> .thumb ~ .tright {
+			float: right;
+			margin-top: 10px;
+			border: 0;
+		}
+
+		.thumbinner {
+			// stylelint-disable-next-line declaration-no-important
+			width: auto !important;
+		}
+
+		> .rcat,
+		> .redirectMsg,
+		> table:not( .infobox ),
+		> .ambox,
+		> .hatnote {
+			// stylelint-disable-next-line declaration-no-important
+			float: none !important;
+			// stylelint-disable-next-line declaration-no-important
+			width: 100% !important;
+		}
+	}
+
+	.column {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		flex-basis: 100%;
+		min-width: 50%;
+	}
+
+	section ~ h2 {
+		clear: both;
+	}
 }
 </style>
