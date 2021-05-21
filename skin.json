@@ -47,6 +47,14 @@
 			]
 		}
 	},
+	"ConfigRegistry": {
+		"alexandria": "GlobalVarConfig::newInstance"
+	},
+	"config": {
+		"AlexandriaSearchApi": {
+			"value": false
+		}
+	},
 	"MessagesDirs": {
 		"Alexandria": [
 			"i18n"

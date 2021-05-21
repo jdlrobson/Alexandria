@@ -28,8 +28,13 @@ class SkinAlexandria extends SkinMustache {
         ];
     }
 
-    public static function onSkinTemplateNavigation( $sk, &$content_navigation ) {
+    protected function getJsConfigVars() : array {
+        return [
+            'wgAlexandriaSearchApi' => $this->getConfig()->get( 'AlexandriaSearchApi' )
+        ];
+    }
 
+    public static function onSkinTemplateNavigation( $sk, &$content_navigation ) {
         // There is no way to render edit icons without history.
         // https://phabricator.wikimedia.org/T283184
         if ( $sk->getSkinName() === 'alexandria' ) {

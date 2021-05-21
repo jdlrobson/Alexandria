@@ -72,7 +72,6 @@ module.exports = {
 			appClass: '',
 			alexFooterIcons: undefined,
 			alexSidebar: undefined,
-			alexLastMod: '',
 			domain: window.location.host,
 			msgTagline: undefined,
 			linkMainpage: undefined,
@@ -92,11 +91,14 @@ module.exports = {
 			},
 			dataFooter: {
 				dataPlaces: {
+					// varies on article
 					items: []
 				}
 			},
 			dataPortlets: {
+				// vary on each article
 				dataViews: {},
+				// The following data is static, should be same across articles
 				dataNotifications: {
 					htmlItems: ''
 				},
@@ -114,7 +116,8 @@ module.exports = {
 			// Banner
 			htmlSiteNotice: '',
 
-			// Article
+			// Vary on article
+			alexLastMod: '',
 			htmlTitle: '',
 			htmlSubtitle: '',
 			htmlBodyContent: ''
@@ -127,11 +130,42 @@ module.exports = {
 		AppFooter: Footer
 	},
 	methods: {
-		renderArticle: function ( path ) {
+		renderArticle: function ( title ) {
 			this.appClass = 'app__loading';
+			const portlets = this.dataPortlets;
+
 			return fetch(
-				`${path}?useskin=alexandria&useformat=json`
-			).then( ( resp ) => resp.json() ).then( ( json ) => {
+				mw.config.get( 'wgAlexandriaSearchApi' ).replace( '$1', title ),
+				{
+					redirect: 'follow'
+				}
+			).then( ( resp ) => {
+				if ( resp.headers.get( 'Content-Type' ).indexOf( 'text/html' ) > -1 ) {
+					return resp.text().then(
+						( html ) => {
+							const startIndex = html.indexOf( '<body' );
+							const endIndex = html.indexOf( '</body' );
+							const bodyContentHtml = html.slice( startIndex, endIndex ).replace(
+								/^<body[^>]*>/, ''
+							);
+							return Promise.resolve( {
+								'html-title': title,
+								'alex-last-mod': '',
+								'html-subtitle': '',
+								'html-body-content': bodyContentHtml,
+								'data-portlets': Object.assign( {}, portlets, {
+									'data-views': {}
+								} ),
+								'data-footer': {
+									'data-places': {}
+								}
+							} );
+						}
+					);
+				} else {
+					return resp.json();
+				}
+			} ).then( ( json ) => {
 				json = mapAllKeysRecursive( json );
 				this.appClass = '';
 				Object.keys( json ).forEach( ( key ) => {
@@ -157,27 +191,28 @@ module.exports = {
 			} );
 		} );
 
-		const getClosestLink = (node) => {
-			if (node.tagName === 'BODY') {
+		const getClosestLink = ( node ) => {
+			if ( node.tagName === 'BODY' ) {
 				return false;
-			} else if (node.tagName === 'A') {
+			} else if ( node.tagName === 'A' ) {
 				return node;
 			} else {
-				return getClosestLink(node.parentNode);
+				return getClosestLink( node.parentNode );
 			}
-		}
+		};
 
 		// Redirect links
 		const clickHandler = ( ev ) => {
 			const closestLink = getClosestLink( ev.target );
 			let title;
+			let href;
 			if ( closestLink ) {
 				ev.preventDefault();
-				href = closestLink.getAttribute('href');
-				if (href.indexOf('search=') > -1) {
-					const m = href.match(/search\=([^&]*)/);
-					if(m) {
-						title = m[1];
+				href = closestLink.getAttribute( 'href' );
+				if ( href.indexOf( 'search=' ) > -1 ) {
+					const m = href.match( /search=([^&]*)/ );
+					if ( m ) {
+						title = m[ 1 ];
 					}
 				} else {
 					title = closestLink.getAttribute( 'title' );
@@ -193,6 +228,7 @@ module.exports = {
 					// update scroll position of current page
 					history.replaceState( {
 						path,
+						title,
 						scrollY
 					}, document.title, path );
 
@@ -203,30 +239,35 @@ module.exports = {
 						left: 0,
 						behavior: 'smooth'
 					} );
-					this.renderArticle( newPath ).then( () => {
+					this.renderArticle( title ).then( () => {
 						history.pushState( {
 							path: newPath,
+							title,
 							scrollY: 0
 						}, title, newPath );
 					} );
 				}
 			}
 		};
-		article.addEventListener( 'click', clickHandler );
-		header.querySelector('.search-component').addEventListener( 'click', clickHandler );
-		window.addEventListener( 'popstate', ( ev ) => {
-			const state = ev.state;
 
-			this.renderArticle( state.path ).then( () => {
-				this.$nextTick( () => {
-					window.scrollTo( {
-						top: state.scrollY,
-						left: 0
+		// set up lazy loading if available
+		if ( mw.config.get( 'wgAlexandriaSearchApi' ) ) {
+			article.addEventListener( 'click', clickHandler );
+			header.querySelector( '.search-component' ).addEventListener( 'click', clickHandler );
+			window.addEventListener( 'popstate', ( ev ) => {
+				const state = ev.state;
+
+				this.renderArticle( state.title ).then( () => {
+					this.$nextTick( () => {
+						window.scrollTo( {
+							top: state.scrollY,
+							left: 0
+						} );
 					} );
 				} );
-			} );
 
-		} );
+			} );
+		}
 	}
 };
 </script>
