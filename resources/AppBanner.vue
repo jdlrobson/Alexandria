@@ -1,8 +1,8 @@
 <template>
 	<div class="banner" role="banner">
-		<ul class="skin-alexandria-notifications" v-html="htmlNotifications"></ul>
-		<div></div>
-		<div v-html="html"></div>
+		<div>
+			<ul class="skin-alexandria-notifications" v-html="htmlNotifications"></ul>
+		</div>
 	</div>
 </template>
 
@@ -11,8 +11,7 @@ const DropdownMenu = require( './DropdownMenu.vue' );
 module.exports = {
 	name: 'Banner',
 	props: {
-		htmlNotifications: String,
-		html: String
+		htmlNotifications: String
 	},
 	components: {
 		DropdownMenu: DropdownMenu
@@ -22,7 +21,8 @@ module.exports = {
 
 <style lang="less">
 .skin-alexandria-notifications {
-	float: right;
+	flex-grow: 1;
+	text-align: right;
 	list-style: none;
 	margin: 2px 20px 0;
 
@@ -43,6 +43,9 @@ module.exports = {
 	background-color: #333;
 	padding: 5px;
 	height: 40px;
+	position: sticky;
+	top: 0px;
+	z-index: 1;
 
 	> div {
 		display: flex;

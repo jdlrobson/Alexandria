@@ -1,6 +1,6 @@
 <template>
 	<div id="ol-app">
-		<app-banner :html="htmlSiteNotice"
+		<app-banner
 			:html-notifications="dataPortlets.dataNotifications.htmlItems"></app-banner>
 		<app-header
 			:logo-width="dataLogos.wordmark.width"
@@ -9,7 +9,7 @@
 			:tagline="msgTagline"
 			:mainpage="linkMainpage"
 			:form-action="dataSearchBox.formAction"
-			:title="msgSitetitle"
+			:sitetitle="msgSitetitle"
 			:placeholder="msgTooltipSearch"
 			:button-label="msgSearch"
 			:footer-search-text="msgSearchsuggestContaining"
@@ -17,14 +17,19 @@
 			:html-sidebar="alexSidebar"
 		></app-header>
 		<app-article
+			:banner="htmlSiteNotice"
+			:lastmodified="alexLastmod"
 			:tagline="msgTagline"
 			:html="htmlBodyContent"
-			:title="htmlTitle"
+			:html-page-title="htmlTitle"
 			:subtitle="htmlSubtitle"
-			:menu="dataPortlets.dataViews"
+			:menu-id="dataPortlets.dataViews.id"
+			:menu-class="dataPortlets.dataViews.class"
+			:menu-html-items="dataPortlets.dataViews.htmlItems"
 		></app-article>
 		<app-footer :blurb="alexFooterIcons"
-			:menu="dataFooter.dataPlaces"
+			:places-items-array="dataFooter.dataPlaces.arrayItems"
+			:places-id="dataFooter.dataPlaces.id"
 			:heading="msgSitetitle"></app-footer>
 	</div>
 </template>
@@ -70,6 +75,7 @@ module.exports = {
 		return Object.assign( {
 			alexFooterIcons: undefined,
 			alexSidebar: undefined,
+			alexLastMod: '',
 			domain: window.location.host,
 			msgTagline: undefined,
 			linkMainpage: undefined,
@@ -181,7 +187,7 @@ body {
 	line-height: normal;
 	background-color: #e1dcc5;
 	font-family: 'Lucida Grande', 'Verdana', 'Geneva', 'Helvetica', 'Arial', sans-serif;
+	padding: 0;
+	margin: 0;
 }
-
-@import 'skin-system-hacks.less';
 </style>

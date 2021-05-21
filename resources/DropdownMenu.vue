@@ -1,9 +1,9 @@
 <template>
 	<li class="dropdown-menu">
-		<label :for="id">
+		<label :for="menuId">
 			{{ label }}
 		</label>
-		<input :id="id"
+		<input :id="menuId"
 			role="button"
 			type="checkbox"
 			class="navigation-component__checkbox">
@@ -15,7 +15,7 @@
 
 <script>
 module.exports = {
-	props: [ 'id', 'label' ],
+	props: [ 'menuId', 'label' ],
 	name: 'DropdownMenu'
 };
 </script>

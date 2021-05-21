@@ -4,12 +4,14 @@
 			<div class="alexandria-article__tagline">
 				{{ tagline }}
 			</div>
-			<h1 v-html="title"></h1>
+			<h1 v-html="htmlPageTitle"></h1>
 			<div class="article__subtitle" v-html="subtitle"></div>
-			<portlet :id="menu.id"
-				:class="menu.class"
-				:html="menu.htmlItems"></portlet>
+			<ul class="alexandria-article__lastmod" v-html="lastmodified"></ul>
+			<portlet :id="menuId"
+				:class="menuClass"
+				:html="menuHtmlItems"></portlet>
 		</header>
+		<div v-html="banner"></div>
 		<div v-html="html"></div>
 	</article>
 </template>
@@ -21,11 +23,15 @@ module.exports = {
 		Portlet: require( './Portlet.vue' )
 	},
 	props: {
+		lastmodified: String,
+		banner: String,
 		tagline: String,
-		title: String,
+		htmlPageTitle: String,
 		subtitle: String,
 		html: String,
-		menu: Object
+		menuId: String,
+		menuClass: String,
+		menuHtmlItems: String
 	}
 };
 </script>
@@ -42,6 +48,24 @@ module.exports = {
 	border: 1px solid #babbae;
 	z-index: 0;
 	position: relative;
+
+	&__lastmod {
+		max-width: 190px;
+		white-space: wrap;
+		text-align: right;
+		margin-top: 3px 0 0;
+		font-size: 11px;
+		font-weight: 400;
+		color: #615132;
+		list-style: none;
+		padding: 0;
+		display: inline;
+
+		li {
+			margin-left: 8px;
+			display: inline;
+		}
+	}
 
 	&__tagline {
 		font-style: oblique;
@@ -72,6 +96,24 @@ module.exports = {
 		white-space: pre-wrap;
 		border-color: rgb(0, 0, 0);
 		padding: 12px;
+	}
+
+	header {
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+
+		h1 {
+			flex-grow: 1;
+		}
+	}
+
+	a {
+		color: #02598b;
+	}
+
+	a:hover, a:visited {
+		color: #003266;
 	}
 }
 

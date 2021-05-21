@@ -1,7 +1,7 @@
 <template>
 	<header id="header-bar" class="header-bar">
 		<div class="hamburger-component checkbox-menu">
-			<dropdown-menu id="more" label="Home">
+			<dropdown-menu menu-id="more" label="Home">
 				<ul v-html="htmlSidebar"></ul>
 			</dropdown-menu>
 		</div>
@@ -12,10 +12,10 @@
 					<img v-if="logoSrc"
 						class="logo-icon"
 						:src="logoSrc"
-						:alt="title"
+						:alt="sitetitle"
 						:width="logoWidth"
 						:height="logoHeight">
-					<h1 v-else>{{ title }}</h1>
+					<h1 v-else>{{ sitetitle }}</h1>
 				</div>
 			</a>
 		</div>
@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="account-component checkbox-menu">
-			<dropdown-menu id="p-personal" label="My account">
+			<dropdown-menu menu-id="p-personal" label="My account">
 				<ul v-html="htmlUserMenu"></ul>
 			</dropdown-menu>
 		</div>
@@ -51,7 +51,7 @@ const wvui = require( 'wvui' );
 module.exports = {
 	name: 'Header',
 	props: [
-		'title', 'tagline',
+		'sitetitle', 'tagline',
 		// logo
 		'logoSrc', 'logoWidth', 'logoHeight', 'mainpage',
 		// for search
@@ -67,7 +67,7 @@ module.exports = {
 </script>
 
 <style lang="less">
-header {
+.header-bar {
 	height: 61px;
 	max-width: 960px;
 	min-width: 300px;
@@ -77,7 +77,9 @@ header {
 	z-index: 1;
 	position: relative;
 	margin: 20px auto;
-	flex-direction: row;
+	position: sticky;
+	top: 40px;
+	background: #e1dcc5;
 
 	h1 {
 		flex-grow: 1;
@@ -94,7 +96,7 @@ header {
 
 	.logo-component {
 		padding-right: 15px;
-		margin: 0 0 5px;
+		margin: 0 40px 5px 0;
 	}
 
 	.navigation-component {

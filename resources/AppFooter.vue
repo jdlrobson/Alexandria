@@ -2,8 +2,8 @@
 	<footer>
 		<div class="footer__content">
 			<div class="footer__menus">
-				<footer-menu :id="menu.item" :heading="heading">
-					<li v-for="( m ) in menu.arrayItems"
+				<footer-menu :id="placesId" :heading="heading">
+					<li v-for="( m ) in placesItemsArray"
 						:id="m.id"
 						:key="m.id"
 						v-html="m.html"></li>
@@ -22,7 +22,7 @@ module.exports = {
 	components: {
 		FooterMenu: FooterMenu
 	},
-	props: [ 'blurb', 'menu', 'heading' ]
+	props: [ 'blurb', 'placesId', 'placesItemsArray', 'heading' ]
 };
 </script>
 

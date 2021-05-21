@@ -16,12 +16,15 @@
 	"AutoloadClasses": {
 		"SkinAlexandria": "SkinAlexandria.php"
 	},
+	"Hooks": {
+		"SkinTemplateNavigation": "SkinAlexandria::onSkinTemplateNavigation"
+	},
 	"ValidSkinNames": {
 		"alexandria": {
 			"class": "SkinAlexandria",
 			"args": [
 				{
-					"name": "Alexandria",
+					"name": "alexandria",
 					"templateDirectory": "skins/Alexandria/templates/",
 					"messages": [
 						"searchsuggest-containing",
