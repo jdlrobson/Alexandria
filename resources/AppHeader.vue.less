@@ -1,0 +1,114 @@
+.header-bar {
+	height: 61px;
+	max-width: 960px;
+	min-width: 300px;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	z-index: 1;
+	position: sticky;
+	margin: 20px auto;
+	top: 40px;
+	background: #e1dcc5;
+
+	h1 {
+		flex-grow: 1;
+	}
+
+	.hamburger-component {
+		order: 0;
+		margin-right: 5px;
+
+		label {
+			background-image: url( menu.png );
+		}
+	}
+
+	.logo-component {
+		padding-right: 15px;
+		margin: 0 40px 5px 0;
+	}
+
+	.navigation-component {
+		flex: 1;
+		order: 2;
+		display: flex;
+		text-align: center;
+		position: relative;
+
+		li {
+			flex-basis: 100%;
+			cursor: pointer;
+			padding: 5px 0;
+			font-size: 1em;
+			list-style: none;
+		}
+	}
+
+	.search-component {
+		width: 45px;
+		flex: 1;
+		order: 3;
+		margin-right: 0;
+
+		.search-bar-component {
+			width: 207px;
+			display: inline-block;
+			border: 1px solid #babbae;
+			border-radius: 0.3em;
+			background-color: #f9f9f9;
+			position: relative;
+
+			.search-bar {
+				transition: all 0.2s;
+				background: #f9f9f9;
+				border-radius: 0.3em;
+				display: flex;
+			}
+		}
+
+		// FIXME: override bad defaults...
+		.wvui-typeahead-search__submit {
+			display: none;
+		}
+
+		// FIXME: override bad defaults...
+		.wvui-typeahead-search .wvui-input__input {
+			border-right-color: #a2a9b1;
+		}
+	}
+
+	label {
+		display: inline-block;
+		color: transparent;
+		border: 0;
+		margin-right: 5px;
+		background-size: cover;
+		background-position: center;
+		width: 45px;
+		height: 45px;
+		border-radius: 3px;
+	}
+
+	.account-component {
+		flex: none;
+		order: 4;
+		padding-left: 5px;
+
+		// notifications
+
+		> div {
+			display: flex;
+			align-items: center;
+		}
+
+		label {
+			background-color: #999;
+			background-image: url( avatar.png );
+		}
+
+		ul {
+			right: 11px;
+		}
+	}
+}

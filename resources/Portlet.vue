@@ -16,14 +16,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-.alexandria-portlet {
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-
-	li {
-		display: inline-block;
-	}
-}
+@import 'Portlet.vue.less';
 </style>

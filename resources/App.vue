@@ -271,22 +271,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-* {
-	box-sizing: border-box;
-}
-
-body {
-	font-size: 100%;
-	line-height: normal;
-	background-color: #e1dcc5;
-	font-family: 'Lucida Grande', 'Verdana', 'Geneva', 'Helvetica', 'Arial', sans-serif;
-	padding: 0;
-	margin: 0;
-}
-
-.app__loading {
-	height: 100%;
-	overflow: hidden;
-	opacity: 0.3;
-}
+@import 'App.vue.less';
 </style>

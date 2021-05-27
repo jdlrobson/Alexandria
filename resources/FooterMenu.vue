@@ -13,28 +13,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-.footer__menu {
-	flex: 1;
-	min-width: 150px;
-	margin: 20px 0;
-	padding: 0;
-
-	h2 {
-		color: #333;
-		font-size: 1em;
-		margin: 0;
-	}
-
-	li {
-		font-size: 1em;
-		list-style-type: none;
-		white-space: nowrap;
-		margin: 5px 0;
-	}
-
-	a {
-		color: #003266;
-		text-decoration: underline;
-	}
-}
+@import 'FooterMenu.vue.less';
 </style>

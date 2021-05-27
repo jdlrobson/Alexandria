@@ -20,37 +20,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-.skin-alexandria-notifications {
-	flex-grow: 1;
-	text-align: right;
-	list-style: none;
-	margin: 2px 20px 0;
-
-	li {
-		display: inline-block;
-		margin-left: 10px;
-		filter: invert( 1 );
-		opacity: 1;
-	}
-
-	~ div {
-		clear: both;
-	}
-}
-
-.banner {
-	background-color: #333;
-	padding: 5px;
-	height: 40px;
-	position: sticky;
-	top: 0;
-	z-index: 1;
-
-	> div {
-		display: flex;
-		max-width: 960px;
-		margin: 0 auto;
-		align-items: center;
-	}
-}
+@import 'AppBanner.vue.less';
 </style>
