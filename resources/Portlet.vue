@@ -16,5 +16,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-@import 'Portlet.vue.less';
+// import 'Portlet.vue.less';
 </style>

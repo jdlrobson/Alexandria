@@ -21,5 +21,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-@import 'DropdownMenu.vue.less';
+// @import 'DropdownMenu.vue.less';
 </style>

@@ -13,5 +13,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-@import 'FooterMenu.vue.less';
+// @import 'FooterMenu.vue.less';
 </style>

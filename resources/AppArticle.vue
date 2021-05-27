@@ -37,5 +37,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-@import 'AppArticle.vue.less';
+// @import 'AppArticle.vue.less';
 </style>

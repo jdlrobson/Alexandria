@@ -20,5 +20,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-@import 'AppBanner.vue.less';
+// @import 'AppBanner.vue.less';
 </style>

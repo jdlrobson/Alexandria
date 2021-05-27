@@ -27,5 +27,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-@import 'AppFooter.vue.less';
+// @import 'AppFooter.vue.less';
 </style>

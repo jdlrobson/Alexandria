@@ -271,5 +271,5 @@ module.exports = {
 </script>
 
 <style lang="less">
-@import 'App.vue.less';
+// @import 'App.vue.less';
 </style>
