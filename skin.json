@@ -2,7 +2,7 @@
 	"name": "Alexandria",
 	"version": "1.0.0",
 	"namemsg": "skinname-alexandria",
-	"descriptionmsg": "alexandria-skin-desc",
+	"descriptionmsg": "alexandria-desc",
 	"url": "https://www.mediawiki.org/wiki/Skin:Alexandria",
 	"author": [
 		"[https://skins.wmflabs.org skins.wmflabs.org v.1.0]"
