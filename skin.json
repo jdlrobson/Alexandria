@@ -17,7 +17,7 @@
 		"SkinAlexandria": "SkinAlexandria.php"
 	},
 	"Hooks": {
-		"SkinTemplateNavigation": "SkinAlexandria::onSkinTemplateNavigation"
+		"SkinTemplateNavigation::Universal": "SkinAlexandria::onSkinTemplateNavigation"
 	},
 	"ValidSkinNames": {
 		"alexandria": {
