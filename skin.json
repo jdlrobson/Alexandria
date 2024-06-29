@@ -9,7 +9,7 @@
 	],
 	"type": "skin",
 	"requires": {
-		"MediaWiki": ">= 1.37.0"
+		"MediaWiki": ">= 1.42.0"
 	},
 	"license-name": "GPL-2.0-or-later",
 	"manifest_version": 2,
@@ -67,8 +67,7 @@
 	},
 	"ResourceModules": {
 		"skins.alexandria.styles": {
-			"targets": [ "desktop", "mobile" ],
-			"class": "ResourceLoaderSkinModule",
+			"class": "MediaWiki\\ResourceLoader\\SkinModule",
 			"features": {
 				"normalize": true,
 				"content-thumbnails": true,
