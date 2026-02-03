@@ -16,15 +16,18 @@
 	"AutoloadClasses": {
 		"SkinAlexandria": "SkinAlexandria.php"
 	},
-	"Hooks": {
-		"SkinTemplateNavigation::Universal": "SkinAlexandria::onSkinTemplateNavigation"
-	},
 	"ValidSkinNames": {
 		"alexandria": {
 			"class": "SkinAlexandria",
 			"args": [
 				{
 					"name": "alexandria",
+					"menus": [
+						"views",
+						"user-page",
+						"notifications",
+						"user-menu"
+					],
 					"templateDirectory": "resources/dist/",
 					"responsive": true,
 					"messages": [
